@@ -2,7 +2,7 @@
 
 import { inject } from "@loopback/core";
 import { del, get, param, patch, post, requestBody, response } from "@loopback/rest";
-import { UserApiService } from "../types";
+import { UserApiService, UserObject } from "../types";
 
 export class UserCrudController {
 
@@ -32,9 +32,9 @@ export class UserCrudController {
           },
         },
       },
-    }) user: any
-  ): Promise<Object> {
-    return this.openApiService.userControllerCreate({},{
+    }) user: UserObject
+  ): Promise<UserObject> {
+    return this.openApiService.userControllerCreate({}, {
       requestBody: user,
       requestContentType: 'application/json'
     });
@@ -52,8 +52,8 @@ export class UserCrudController {
     },
   })
   async count1(
-  ): Promise<Object> {
-    return this.openApiService.userControllerCount({where : ''});
+  ): Promise<UserObject> {
+    return this.openApiService.userControllerCount({ where: '' });
   }
   @get('/openapi/users/{id}')
   @response(200, {
@@ -68,8 +68,8 @@ export class UserCrudController {
   })
   async findById1(
     @param.path.number('id') id: number
-  ): Promise<Object> {
-    return this.openApiService.userControllerFindById({ id: id ,filter: ''});
+  ): Promise<UserObject> {
+    return this.openApiService.userControllerFindById({ id: id, filter: '' });
   }
 
   @patch('/openapi/users/{id}')
@@ -94,9 +94,9 @@ export class UserCrudController {
         },
       },
     })
-    user: any,
-  ): Promise<Object> {
-    return this.openApiService.userControllerUpdateById({ id: id },{
+    user: UserObject,
+  ): Promise<UserObject> {
+    return this.openApiService.userControllerUpdateById({ id: id }, {
       requestBody: user,
       requestContentType: 'application/json'
     });
@@ -113,7 +113,7 @@ export class UserCrudController {
       }
     },
   })
-  async deleteById1(@param.path.number('id') id: number): Promise<Object> {
+  async deleteById1(@param.path.number('id') id: number): Promise<UserObject> {
     return this.openApiService.userControllerDeleteById({ id: id, filter: '' });
   }
 
@@ -132,9 +132,8 @@ export class UserCrudController {
     },
   })
   async find1(
-  ): Promise<Object[]> {
-    var result: any = this.openApiService.userControllerFind({ filter: '' });
-    return result;
+  ): Promise<UserObject[]> {
+    return this.openApiService.userControllerFind({ filter: '' });
   }
 
   ///--------------------------------------------------------///
@@ -159,8 +158,8 @@ export class UserCrudController {
           },
         },
       },
-    }) user: any
-  ): Promise<Object> {
+    }) user: UserObject
+  ): Promise<UserObject> {
     return this.restDataSourceService.createUser(user["firstName"], user["middleName"], user["lastName"], user["email"],
       user["address"], user["phoneNumber"], user["customerId"]);
   }
@@ -177,7 +176,7 @@ export class UserCrudController {
     },
   })
   async count(
-  ): Promise<Object> {
+  ): Promise<UserObject> {
     return this.restDataSourceService.getUsersCount();
   }
   @get('/rest/users/{id}')
@@ -193,7 +192,7 @@ export class UserCrudController {
   })
   async findById(
     @param.path.number('id') id: number
-  ): Promise<Object> {
+  ): Promise<UserObject> {
     return this.restDataSourceService.getUserById(id);
   }
 
@@ -219,8 +218,8 @@ export class UserCrudController {
         },
       },
     })
-    user: any,
-  ): Promise<Object> {
+    user: UserObject,
+  ): Promise<UserObject> {
     return this.restDataSourceService.updateUserById(id, user["firstName"], user["middleName"], user["lastName"], user["email"],
       user["address"], user["phoneNumber"], user["customerId"]);
   }
@@ -236,7 +235,7 @@ export class UserCrudController {
       }
     },
   })
-  async deleteById(@param.path.number('id') id: number): Promise<Object> {
+  async deleteById(@param.path.number('id') id: number): Promise<UserObject> {
     return this.restDataSourceService.deleteUserById(id);
   }
 
@@ -255,9 +254,7 @@ export class UserCrudController {
     },
   })
   async find(
-  ): Promise<Object[]> {
-    var result: any = this.restDataSourceService.getUsers();
-    console.log(await this.restDataSourceService.getUsers());
-    return result;
+  ): Promise<UserObject[]> {
+    return this.restDataSourceService.getUsers();
   }
 }

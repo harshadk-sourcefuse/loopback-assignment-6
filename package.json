@@ -19,10 +19,10 @@
     "prettier:cli": "lb-prettier \"**/*.ts\" \"**/*.js\"",
     "prettier:check": "npm run prettier:cli -- -l",
     "prettier:fix": "npm run prettier:cli -- --write",
-    "eslint": "lb-eslint --report-unused-disable-directives .",
+    "eslint": "lb-eslint --report-unused-disable-directives . --fix",
     "eslint:fix": "npm run eslint -- --fix",
     "pretest": "npm run rebuild",
-    "test": "mocha --recursive \"dist/test\"",
+    "test": "lb-mocha --allow-console-logs \"dist/__tests__\"",
     "posttest": "npm run lint",
     "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
     "premigrate": "npm run build",
@@ -60,11 +60,10 @@
   "devDependencies": {
     "@loopback/build": "^9.0.3",
     "@loopback/eslint-config": "^13.0.3",
-    "@loopback/testlab": "^5.0.4",
-    "@types/node": "^14.18.26",
+    "@loopback/testlab": "^5.0.3",
     "@types/mocha": "^10.0.0",
+    "@types/node": "^14.18.26",
     "eslint": "^8.22.0",
-    "mocha": "^10.1.0",
     "source-map-support": "^0.5.21",
     "typescript": "~4.7.4"
   }

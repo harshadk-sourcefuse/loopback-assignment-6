@@ -93,7 +93,6 @@ export class RestDataSource extends juggler.DataSource
   dataSource(arg0: string): import("@loopback/repository").Model {
     throw new Error("Method not implemented.");
   }
-  [x: string]: any;
   static dataSourceName = 'rest';
   static readonly defaultConfig = config;
 

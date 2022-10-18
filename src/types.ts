@@ -1,12 +1,25 @@
 import { GenericService } from "@loopback/service-proxy";
 
 export interface UserApiService extends GenericService {
-    createUser(firstName: String, middleName: String, lastName: String, email: String,
-        address: String, phoneNumber: String, customerId: String): Promise<Object>;
-    getUsers(): Promise<Object[]>;
-    getUsersCount(): Promise<Object>;
-    getUserById(id: number): Promise<Object>;
-    updateUserById(id: number, firstName: String, middleName: String, lastName: String, email: String,
-        address: String, phoneNumber: String, customerId: String): Promise<Object>;
-    deleteUserById(id: number): Promise<Object>;
-} 
+    createUser(firstName: string, middleName: string, lastName: string, email: string,
+        address: string, phoneNumber: string, customerId: number): Promise<UserObject>;
+    getUsers(): Promise<UserObject[]>;
+    getUsersCount(): Promise<UserObject>;
+    getUserById(id: number): Promise<UserObject>;
+    updateUserById(id: number, firstName: string, middleName: string, lastName: string, email: string,
+        address: string, phoneNumber: string, customerId: number): Promise<UserObject>;
+    deleteUserById(id: number): Promise<UserObject>;
+}
+
+export interface UserObject {
+    id: number;
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    email: string;
+    address: string;
+    phoneNumber: string;
+    customerId: number;
+    createdOn: string;
+    modifiedOn: string;
+}

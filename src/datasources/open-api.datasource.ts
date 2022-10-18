@@ -1,15 +1,20 @@
-import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
-import {juggler} from '@loopback/repository';
+import { inject, lifeCycleObserver, LifeCycleObserver } from '@loopback/core';
+import { juggler } from '@loopback/repository';
 
 const config = {
   name: 'openApi',
   connector: 'openapi',
   spec: 'http://localhost:8000/openapi.json',
-  transformResponse : (res:any, operationSpec:any)=>{
+  transformResponse: (res: { status: number; body: Object; statusText: string }, operationSpec: Object) => {
     if (res.status < 400) {
       return res.body;
     }
-    const err:any = new Error(`${res.status} ${res.statusText}`);
+    const err: {
+      name: string;
+      message: string;
+      stack?: string;
+      details?: Object
+    } = new Error(`${res.status} ${res.statusText}`);
     err.details = res;
     throw err;
   }
@@ -26,7 +31,7 @@ export class OpenApiDataSource extends juggler.DataSource
   static readonly defaultConfig = config;
 
   constructor(
-    @inject('datasources.config.OpenApi', {optional: true})
+    @inject('datasources.config.OpenApi', { optional: true })
     dsConfig: object = config,
   ) {
     super(dsConfig);

@@ -18,7 +18,7 @@ export class User extends Entity {
   @property({
     type: 'string',
   })
-  lastname?: string;
+  lastName?: string;
 
   @property({
     type: 'string',
@@ -28,7 +28,7 @@ export class User extends Entity {
 
 
   getFullName():string {
-    return [this.firstName, this.lastname].filter(ele => ele && ele.length>0).join(" ");
+    return [this.firstName, this.lastName].filter(ele => ele && ele.length>0).join(" ");
   }
 
   constructor(data?: Partial<User>) {
