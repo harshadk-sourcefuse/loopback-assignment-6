@@ -11,14 +11,14 @@ export const testdb: juggler.DataSource = new juggler.DataSource({
 });
 
 export const createDbFile = () => {
-    fs.appendFile('./data/test.json', '{}', (err: Error|null) => {
+    fs.appendFile('./data/test.json', '{}', (err: Error | null) => {
         if (err) throw err;
         console.log('File Saved Successfully!');
     });
 }
 
 export const deleteDbFile = () => {
-    fs.unlink('./data/test.json', (err: Error|null) => {
+    fs.unlink('./data/test.json', (err: Error | null) => {
         if (err) throw err;
         console.log('File Deleted Successfully!');
     });
@@ -40,5 +40,6 @@ export async function givenUser(data?: Partial<User>) {
 }
 
 export async function givenEmptyDatabase() {
+    console.log("deleting all data for test case");
     await new UserRepository(testdb).deleteAll();
 }
