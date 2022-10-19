@@ -9,10 +9,11 @@ export interface UserApiService extends GenericService {
     updateUserById(id: number, firstName: string, middleName: string, lastName: string, email: string,
         address: string, phoneNumber: string, customerId: number): Promise<UserObject>;
     deleteUserById(id: number): Promise<UserObject>;
+    ping(): Promise<Object>;
 }
 
 export interface UserObject {
-    id: number;
+    id?: number;
     firstName: string;
     middleName: string;
     lastName: string;
@@ -20,6 +21,6 @@ export interface UserObject {
     address: string;
     phoneNumber: string;
     customerId: number;
-    createdOn: string;
-    modifiedOn: string;
+    createdOn?: string | null;
+    modifiedOn?: string | null;
 }

@@ -1,7 +1,7 @@
 import { inject, lifeCycleObserver, LifeCycleObserver } from '@loopback/core';
 import { juggler } from '@loopback/repository';
 
-const config = {
+export const config = {
   name: 'rest',
   connector: 'rest',
   operations: [
@@ -29,7 +29,7 @@ const config = {
         "method": "PATCH",
         "url": "http://localhost:8000/users/{id}",
         "body": {
-          "id" : "{id}",
+          "id": "{id}",
           "firstName": "{firstName}",
           "lastName": "{lastName}",
           "middleName": "{middleName}",
@@ -78,6 +78,15 @@ const config = {
       },
       functions: {
         "getUsersCount": []
+      }
+    },
+    {
+      template: {
+        "method": "GET",
+        "url": "http://localhost:8000/ping"
+      },
+      functions: {
+        "ping": []
       }
     }
   ]

@@ -1,9 +1,10 @@
-import {LoopbackAssignment6Application} from '../..';
+import { LoopbackAssignment6Application } from '../..';
 import {
   createRestAppClient,
   givenHttpServerConfig,
   Client,
 } from '@loopback/testlab';
+import { testDbConfig } from '../database.helper';
 
 export async function setupApplication(): Promise<AppWithClient> {
   const restConfig = givenHttpServerConfig({
@@ -19,11 +20,13 @@ export async function setupApplication(): Promise<AppWithClient> {
   });
 
   await app.boot();
+
+  app.bind('datasources.config.memoryDB').to(testDbConfig);
+
   await app.start();
 
   const client = createRestAppClient(app);
-
-  return {app, client};
+  return { app, client };
 }
 
 export interface AppWithClient {

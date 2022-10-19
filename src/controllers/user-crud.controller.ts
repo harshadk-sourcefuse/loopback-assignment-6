@@ -1,5 +1,3 @@
-// Uncomment these imports to begin using these cool features!
-
 import { inject } from "@loopback/core";
 import { del, get, param, patch, post, requestBody, response } from "@loopback/rest";
 import { UserApiService, UserObject } from "../types";
@@ -256,5 +254,20 @@ export class UserCrudController {
   async find(
   ): Promise<UserObject[]> {
     return this.restDataSourceService.getUsers();
+  }
+  @get('/rest/users')
+  @response(200, {
+    description: 'ping the rest service',
+    content: {
+      'application/json': {
+        schema: {
+          type: 'object'
+        },
+      },
+    }
+  })
+  async ping(
+  ): Promise<Object> {
+    return this.restDataSourceService.ping();
   }
 }

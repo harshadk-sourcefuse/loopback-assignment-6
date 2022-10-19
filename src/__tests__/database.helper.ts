@@ -2,13 +2,13 @@ import { juggler } from '@loopback/repository';
 import * as fs from 'fs';
 import { User } from '../models';
 import { UserRepository } from '../repositories';
-
-export const testdb: juggler.DataSource = new juggler.DataSource({
+export const testDbConfig = {
     name: 'memoryDB',
     connector: 'memory',
     localStorage: '',
     file: './data/test.json'
-});
+};
+export const testdb: juggler.DataSource = new juggler.DataSource(testDbConfig);
 
 export const createDbFile = () => {
     fs.appendFile('./data/test.json', '{}', (err: Error | null) => {
